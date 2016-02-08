@@ -282,7 +282,11 @@
         </div>
 
         <div class="block_calendar">
-
+            
+            <ul>
+                
+            <li>
+                
             <div class="block_calendar_days">
 
                 <a href="" class="{{EgaisMonthWeekDaySelectedDuration[2]}}" ng-click="GetLineEgaisReportMonth(2)">Месяц</a>
@@ -292,24 +296,26 @@
                 <a href="" class="{{EgaisMonthWeekDaySelectedDuration[0]}}" ng-click="GetLineEgaisReportDay(0)">За сутки</a>
 
             </div>
+            
+            </li>
+            
+                <ul>
 
-            <div>
+                <li>Период:</li>
 
-                <span> Период:</span>
+                <li><input kendo-date-time-picker ng-model="EgaisStartDate" k-options="DatePickerOptions" style="width: 100%;" /></li>
 
-                <input kendo-date-time-picker ng-model="EgaisStartDate" k-options="DatePickerOptions" />
+                <li><span>&#8211;</span></li>
 
-                <span>&#8211;</span>
+                <li><input kendo-date-time-picker ng-model="EgaisEndDate" k-options="DatePickerOptions" style="width: 100%;" /></li>
 
-                <input kendo-date-time-picker ng-model="EgaisEndDate" k-options="DatePickerOptions" />
+                <li><a class="calendar_but" href="" ng-click="GetLineEgaisReportCustomDuration(EgaisStartDate, EgaisEndDate)">Показать</a></li>
+                
+                </ul>
 
-
-
-            </div>
-
-            <div><a class="calendar_but" href="" ng-click="GetLineEgaisReportCustomDuration(EgaisStartDate, EgaisEndDate)">Показать</a></div>
-
-            <a href="#" class="calendar_logexp">Выгр.отчет по произв.</a>
+            <li><a href="#" class="calendar_logexp">Выгр.отчет по произв.</a></li>
+            
+            </ul>
 
         </div>
 
@@ -396,6 +402,10 @@
         </div>
 
         <div class="block_calendar">
+            
+            <ul>
+                
+            <li>
 
             <div class="block_calendar_days">
 
@@ -408,24 +418,34 @@
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[0]}}" ng-click="GetLineFlkDay(0)">За сутки</a>
 
             </div>
+            
+            </li>
 
-            <div>
+            <li>
+                
+                <ul>
 
-                <span> Период:</span>
+                <li><span> Период:</span></li>
 
-                <input kendo-date-time-picker ng-model="FlkStartDate" k-options="DatePickerOptions" />
+                <li><input kendo-date-time-picker ng-model="FlkStartDate" k-options="DatePickerOptions" style="width: 100%;" /></li>
 
-                <span>&#8211;</span>
+                <li>&#8211;</li>
 
-                <input kendo-date-time-picker ng-model="FlkEndDate" k-options="DatePickerOptions" />
+                <li><input kendo-date-time-picker ng-model="FlkEndDate" k-options="DatePickerOptions" style="width: 100%;" /></li>
 
-
-
-            </div>
-
-            <div><a class="calendar_but" href="" ng-click="GetLineFlkCustomDuration(FlkStartDate, FlkEndDate)">Показать</a></div>
+                <li><a class="calendar_but" href="" ng-click="GetLineFlkCustomDuration(FlkStartDate, FlkEndDate)">Показать</a></li>
+                
+                </ul>
+            
+            </li>
+            
+            <li>
 
             <a href="#" class="calendar_logexp">Выгрузить логи</a>
+            
+            </li>
+            
+            </ul>
 
         </div>
 

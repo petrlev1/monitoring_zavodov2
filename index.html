@@ -139,22 +139,35 @@
             <label for="block1_egais" class="block1_open"></label>
             <div class="block1_errorline"></div>
         </div>
+        
+        
         <div class="block_calendar">
+        <ul>
+        <li>
             <div class="block_calendar_days">
                 <a href="" class="{{EgaisMonthWeekDaySelectedDuration[2]}}" ng-click="GetLineEgaisReportMonth(2)">Месяц</a>
                 <a href="" class="{{EgaisMonthWeekDaySelectedDuration[1]}}" ng-click="GetLineEgaisReportWeek(1)">Неделя</a>
-                <a href="" class="{{EgaisMonthWeekDaySelectedDuration[0]}}" ng-click="GetLineEgaisReportDay(0)">За сутки</a>
+                <a href="" class="{{EgaisMonthWeekDaySelectedDuration[0]}}" ng-click="GetLineEgaisReportDay(0)"><nobr>За сутки</nobr></a>
             </div>
-            <div>
-                <span> Период:</span>
-                <input kendo-date-time-picker ng-model="EgaisStartDate" k-options="DatePickerOptions" />
-                <span>&#8211;</span>
-                <input kendo-date-time-picker ng-model="EgaisEndDate" k-options="DatePickerOptions" />
-
-            </div>
-            <div><a class="calendar_but" href="" ng-click="GetLineEgaisReportCustomDuration(EgaisStartDate, EgaisEndDate)">Показать</a></div>
+            </li>
+            
+            <li>
+            <ul>
+                <li>Период:</li>
+                <li><input kendo-date-time-picker ng-model="EgaisStartDate" k-options="DatePickerOptions" style="width: 100%;" /></li>
+                <li><span>&#8211;</span></li>
+                <li><input kendo-date-time-picker ng-model="EgaisEndDate" k-options="DatePickerOptions"  style="width: 100%;" /></li>
+            <li><a class="calendar_but" href="" ng-click="GetLineEgaisReportCustomDuration(EgaisStartDate, EgaisEndDate)">Показать</a></li>
+            </ul>
+            </li>
+            
+            <li>
             <a href="#" class="calendar_logexp">Выгр.отчет по произв.</a>
+            </li>
+           </ul>
         </div>
+        
+        
         <div class="block1_table" ng-repeat="product in CurrentLineEgaisReport.result">
             
             <br />
@@ -196,24 +209,34 @@
             <label for="block1_erflk" class="block1_open"></label>
             <div class="block1_errorline"></div>
         </div>
+        
         <div class="block_calendar">
+        <ul>
+        <li>
             <div class="block_calendar_days">
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[3]}}" ng-click="GetLineFlk(3)">Все</a>
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[2]}}" ng-click="GetLineFlkMonth(2)">Месяц</a>
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[1]}}" ng-click="GetLineFlkWeek(1)">Неделя</a>
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[0]}}" ng-click="GetLineFlkDay(0)">За сутки</a>
             </div>
-            <div>
-                <span> Период:</span>
-                <input kendo-date-time-picker ng-model="FlkStartDate" k-options="DatePickerOptions" />
-                <span>&#8211;</span>
-                <input kendo-date-time-picker ng-model="FlkEndDate" k-options="DatePickerOptions" />
-
-            </div>
-            <div><a class="calendar_but" href="" ng-click="GetLineFlkCustomDuration(FlkStartDate, FlkEndDate)">Показать</a></div>
-            <a href="#" class="calendar_logexp">Выгрузить логи</a>
+            </li>
+            
+          <li>
+           <ul>
+               <li>Период:</li>
+               <li><input kendo-date-time-picker ng-model="FlkStartDate" k-options="DatePickerOptions" style="width: 100%;" /></li>
+               <li>&#8211;</li>
+               <li><input kendo-date-time-picker ng-model="FlkEndDate" k-options="DatePickerOptions" style="width: 100%;" /></li>
+               <li><a class="calendar_but" href="" ng-click="GetLineFlkCustomDuration(FlkStartDate, FlkEndDate)">Показать</a></li>
+           </ul>
+         </li>
+            
+            <li><a href="#" class="calendar_logexp">Выгрузить логи</a></li>
+            
+        </ul>
         </div>
-        <div class="block1_table">
+        
+    <div class="block1_table">
             
             <div class="block1_row block1_row_top">
                 <div class="block1_cell"><span>Дата</span></div>
@@ -235,18 +258,29 @@
             <div class="block1_title">Логи ({{CurrentBox.Logs.result.length}} событий) - {{SelectedDurationText}} </div>
             <label for="block1_logs" class="block1_open"></label>
         </div>
+        
         <div class="block_calendar">
-            <div class="block_calendar_days"><a href="" class="{{MonthWeekDaySelectedDuration[0]}}" ng-click="GetBoxLogsMonth(0)">Месяц</a><a href="" class="{{MonthWeekDaySelectedDuration[1]}}" ng-click="GetBoxLogsWeek(1)">Неделя</a><a href="" class="{{MonthWeekDaySelectedDuration[2]}}" ng-click="GetBoxLogsDay(2)">За сутки</a></div>
-            <div>
-                <span> Период:</span>
-                <input kendo-date-time-picker ng-model="LogsStartDate" k-options="DatePickerOptions" />
-                <span>&#8211;</span>
-                <input kendo-date-time-picker ng-model="LogsEndDate" k-options="DatePickerOptions" />
-
+        <ul>
+         <li>
+            <div class="block_calendar_days">
+            <a href="" class="{{MonthWeekDaySelectedDuration[0]}}" ng-click="GetBoxLogsMonth(0)">Месяц</a>
+            <a href="" class="{{MonthWeekDaySelectedDuration[1]}}" ng-click="GetBoxLogsWeek(1)">Неделя</a>
+            <a href="" class="{{MonthWeekDaySelectedDuration[2]}}" ng-click="GetBoxLogsDay(2)">За сутки</a>
             </div>
-            <div><a class="calendar_but" href="" ng-click="GetBoxLogsCustomDuration(LogsStartDate, LogsEndDate)">Показать</a></div>
-            <a href="#" class="calendar_logexp">Выгрузить логи</a>
+         </li>
+         <li>
+            <ul>
+                <li><span> Период:</span></li>
+                <li><input kendo-date-time-picker ng-model="LogsStartDate" k-options="DatePickerOptions" style="width:100%" /></li>
+                <li>&#8211;</li>
+                <li><input kendo-date-time-picker ng-model="LogsEndDate" k-options="DatePickerOptions" style="width:100%" /></li>
+                <li><a class="calendar_but" href="" ng-click="GetBoxLogsCustomDuration(LogsStartDate, LogsEndDate)">Показать</a></li>
+            </ul>
+          </li>
+            <li><a href="#" class="calendar_logexp">Выгрузить логи</a></li>
+        </ul>
         </div>
+        
         <div class="block1_table">
             <div class="block1_row block1_row_top">
                 <div class="block1_cell"><span>Дата</span></div><div class="block1_cell"><span>Сообщение</span></div>

@@ -381,6 +381,7 @@ nav {
     height: auto;
     background-color: #fff;
     width: 100%;
+    min-width: 800px;
     margin-top: 10px;
     margin-bottom: 25px;
     -webkit-border-top-right-radius: 5px;
@@ -557,22 +558,22 @@ nav {
 }
 
 .block_calendar {
-    display: block;
+    display: table; text-align: left;
+    width: 100%;
     height: 24px;
     font-size: 11px;
     border-bottom-style: solid;
     border-bottom-color: #d8def4;
     border-bottom-width: 1px;
     padding: 8px 8px 12px 8px;
+    border-spacing: 5px 0;
 }
 
-    .block_calendar div {
-        float: left;
-        display: inline-block;
-    }
+.block_calendar ul { display: table-row; }
+.block_calendar ul li {display: table-cell; vertical-align: middle;}
+
 
     .block_calendar .calendar_but {
-        float: left;
         color: #fefbe0;
         font-weight: bold;
         text-decoration: none;
@@ -589,14 +590,10 @@ nav {
             background-image: none;
         }
 
-.block_calendar_days {
-    padding: 6px 0 0 0;
-    margin-right: 20px;
-    margin-left: 10px;
-}
+.block_calendar_days { white-space: nowrap; }
 
-    .block_calendar_days a {
-        margin-right: 15px;
+    .block_calendar_days a { display: inline-block;
+        padding-top: 0; margin-right: 7px;
         text-decoration: none;
         border-bottom-style: dashed;
         border-bottom-width: 1px;
@@ -610,9 +607,8 @@ nav {
         border-style: none;
     }
 
-.calendar_logexp {
+.calendar_logexp { width: 80px;
     display: block;
-    float: right;
     padding: 6px 5px 5px 30px;
     background-image: url(calendar_logexp.png);
     background-position: left;
@@ -620,39 +616,6 @@ nav {
     border-style: none;
     text-decoration: none;
 }
-
-.block_calendar_time {
-    color: #595959;
-}
-
-    .block_calendar_time span {
-        float: left;
-        padding-top: 7px;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
-    .block_calendar_time input {
-        float: left;
-        display: block;
-        width: 120px;
-        height: 25px;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #a6a6a6;
-        background-image: url(calendar_ic.png);
-        background-repeat: no-repeat;
-        background-position: top right;
-    }
-
-    .block_calendar_time .calendar_ic {
-        display: inline-block;
-        float: left;
-        width: 28px;
-        height: 29px;
-        background-image: url(calendar_ic.png);
-        background-repeat: no-repeat;
-    }
 
 .error_row_div {
     background: red;

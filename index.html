@@ -1,269 +1,539 @@
+
 <!DOCTYPE html>
+
 <html ng-app="askpApp">
+
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
     <meta charset="utf-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://centrikt.ru:38000/Content/css/kendo/kendo.common-material.min.css" rel="stylesheet" />
-    <link href="https://centrikt.ru:38000/Content/css/kendo/kendo.material.min.css" rel="stylesheet" />
-   
-    <link rel="stylesheet" href="css/style.css">
 
-    <link href="https://centrikt.ru:38000/Content/css/ui-grid/ui-grid.min.css" rel="stylesheet" />
-    <link href="https://centrikt.ru:38000/Content/img/favicon.ico" rel="SHORTCUT ICON" type="image/gif" />
+
+    <link href="/Content/css/kendo/kendo.common-material.min.css" rel="stylesheet" />
+
+    <link href="/Content/css/kendo/kendo.material.min.css" rel="stylesheet" />
+
+   
+
+    <link rel="stylesheet" href="/Content/css/style.css">
+
+
+
+    <link href="/Content/css/ui-grid/ui-grid.min.css" rel="stylesheet" />
+
+    <link href="/Content/img/favicon.ico" rel="SHORTCUT ICON" type="image/gif" />
+
+
 
     <title></title>
 
 
-    <script src="https://centrikt.ru:38000/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="https://centrikt.ru:38000/Scripts/angular.min.js"></script>
-    <script src="https://centrikt.ru:38000/Scripts/angular-touch.min.js"></script>
+
+
+
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="/Scripts/angular.min.js"></script>
+
+    <script src="/Scripts/angular-touch.min.js"></script>
+
     
-    <script src="https://centrikt.ru:38000/Scripts/kendo.all.min.js"></script>
+
+    <script src="/Scripts/kendo.all.min.js"></script>
+
   
-    <script src="https://centrikt.ru:38000/Scripts/ui-grid.min.js"></script>
-    <script src="https://centrikt.ru:38000/ControllersScripts/AsiiuController.js"></script>
+
+    <script src="/Scripts/ui-grid.min.js"></script>
+
+    <script src="/ControllersScripts/AsiiuController.js"></script>
+
+
 
 </head>
+
 <body ng-controller="AsiiuController">
+
     <div class="header"></div>
+
     <div class="content">
+
         <div class="header2">
+
             <div class="logo"></div>
+
             <h1>Система мониторинга заводов</h1><span>Версия 2.0</span>
+
             <div class="head_links">
+
 <a href="/Account/Logout">test999 [Выйти]</a>            </div>
+
         </div>
 
+
+
         
+
         
+
 <div class="cont_left" id="aside1">
+
     <nav>
+
         <ul ng-repeat="organisation in Organisations">
+
             <li><a href="#" class="nav_open"><div>{{organisation.Name}}</div></a></li>
+
             <div class="sub_nav" ng-repeat="factory in organisation.Factories">
-                <li><a href="#" class="sub_active"><div>{{factoery.Nam}}</div></a></li>
+
+                <li><a href="#" class="sub_active"><div>{{factory.Name}}</div></a></li>
+
                 <div class="sub_sub_nav" ng-repeat="box in factory.Boxes" ng-click="OnLeftMenuBoxClicked(organisation.Name, factory, box)">
+
                     <li>
+
                         <a href="" class="{{SetLeftMenuBoxSelectedStyle(box.IsSelected)}}">
+
                             Шкаф сер.№ {{box.SerialNumber}}
+
                             <div class="icons" ng-bind-html="SetLeftMenuBoxIcons(box)"></div>
+
                         </a>
+
                     </li>
+
                 </div>
+
             </div>
+
         </ul>
+
     </nav>
+
 </div>
+
         <div class="cont_right">
+
             
+
+
+
 
 
 <h1>{{SelectedOrganisationName}} / <strong>{{SelectedFactory.Name}}</strong></h1>
 
+
+
 <div class="map">
-    <img src="https://centrikt.ru:38000/Content/css/map.jpg">
+
+    <img src="/Content/css/map.jpg">
+
 </div>
+
+
 
 <div class="case_tit">
+
     <div>
+
         Шкафы:
+
         <div ng-repeat="box in SelectedFactory.Boxes" style="display: inline-block">
+
             <a class="{{SetInContentBoxSelectedStyle(box.IsSelected)}}"> {{box.SerialNumber}} </a>
+
             <div class="{{SetBoxIconsInContent(box.IsOnline)}}"></div>
+
         </div>
+
     </div>
+
     <span>Номер:<strong>{{CurrentBox.SerialNumber}}</strong></span>
+
     <span>Версия ПО:<strong>2.0</strong></span>
+
     <span>Данные обновлены, время:<strong>{{CurrentBox.SyncDate | mydate | date: 'HH:mm:ss' }}</strong> дата:<strong>{{CurrentBox.SyncDate | mydate | date: 'dd.MM.yyyy'}}</strong></span>
+
 </div>
+
 <form>
+
     <input type="checkbox" name="checkbox" class="openblock_check" id="block1_lines" />
+
     <div class="block1 block1_lines">
+
         <div class="block1_head">
+
             <div class="block1_title">ЛИНИИ - Всего {{CurrentBox.Lines.length}}</div>
+
             <div class="{{LinesErrorsIcon(false)}}"></div>
+
             <label for="block1_lines" class="block1_open"></label>
+
             <div class="block1_errorline"></div>
+
         </div>
+
         <div class="block1_table">
+
             <div class="block1_row block1_row_top">
+
                 <div class="block1_cell"><span>Название линии</span></div><div class="block1_cell"><span>Продукт</span></div><div class="block1_cell"><span>Режим</span></div><div class="block1_cell"><span>Расход,<br> дал/ч</span></div>
+
                 <div class="block1_cell"><span>Температура,<br> C</span></div><div class="block1_cell"><span>Крепость,<br> %</span></div><div class="block1_cell"><span>Объем,<br> дал</span></div><div class="block1_cell"><span>Безводный объем,<br> дал</span></div>
+
             </div>
+
             <div class="block1_row" ng-repeat="line in CurrentBox.Lines" ng-click="OnBoxLineClicked(line)">
+
                 <div class="block1_cell"><span>{{line.PointNumber}}</span></div>
+
                 <div class="block1_cell"><span>{{line.Product}}</span></div>
+
                 <div class="block1_cell"><span>{{line.Mode}}</span></div>
+
                 <div class="block1_cell"><span>{{line.Rate}}</span></div>
+
                 <div class="block1_cell"><span>{{line.Temperature}}</span></div>
+
                 <div class="block1_cell"><span>{{line.Alcohol}}</span></div>
+
                 <div class="block1_cell"><span>{{line.Total}}</span></div>
+
                 <div class="block1_cell"><span>{{line.Vbs}}</span></div>
+
             </div>
+
         </div>
+
     </div>
+
 </form>
 
 
+
+
+
 <form>
+
     <input type="checkbox" name="checkbox" class="openblock_check" id="block1_devices" checked="" />
+
     <div class="block1 block1_devices">
+
         <div class="block1_head">
+
             <div class="block1_title">УСТРОЙСТВА - {{DevicesInfoTitle(CountOfErrorDevices(CurrentBox.Devices))}}</div>
+
             <div class="{{BlockTitleErrorIcon(CountOfErrorDevices(CurrentBox.Devices))}}"></div>
+
             <label for="block1_devices" class="block1_open"></label>
+
         </div>
+
         <div class="block1_table">
+
             <div class="block1_row block1_row_top">
+
                 <div class="block1_cell"><span>Название</span></div>
+
                 <div class="block1_cell"><span>Статус</span></div>
+
                 <div class="block1_cell"><span>Информация</span></div>
+
             </div>
+
             <div class="block1_row {{ErrorRowBackground(device.IsError)}}" ng-repeat="device in CurrentBox.Devices">
+
                 <div class="block1_cell"><span>{{device.Name}}</span></div>
+
                 <div class="block1_cell"><span>{{DeviceStatusText(device.IsError)}}</span></div>
+
                 <div class="block1_cell"><span>{{device.Status}}</span></div>
+
             </div>
+
         </div>
+
     </div>
+
 </form>
 
+
+
 <form>
+
     <input type="checkbox" name="checkbox" class="openblock_check" id="block1_egais" />
+
     <div class="block1 block1_egais">
+
         <div class="block1_head">
+
             <div class="block1_title">ЕГАИС - Линия {{CurrentLine.PointNumber}} - {{EgaisDurationText}} - {{EgaisInfoTitle(CurrentLineEgaisReport.result)}}</div>
+
             <div class="{{FlkErrorIcon(CurrentLineFlkArray.length)}}"></div>
+
             <label for="block1_egais" class="block1_open"></label>
+
             <div class="block1_errorline"></div>
+
         </div>
+
         <div class="block_calendar">
+
             <div class="block_calendar_days">
+
                 <a href="" class="{{EgaisMonthWeekDaySelectedDuration[2]}}" ng-click="GetLineEgaisReportMonth(2)">Месяц</a>
+
                 <a href="" class="{{EgaisMonthWeekDaySelectedDuration[1]}}" ng-click="GetLineEgaisReportWeek(1)">Неделя</a>
+
                 <a href="" class="{{EgaisMonthWeekDaySelectedDuration[0]}}" ng-click="GetLineEgaisReportDay(0)">За сутки</a>
+
             </div>
+
             <div>
+
                 <span> Период:</span>
+
                 <input kendo-date-time-picker ng-model="EgaisStartDate" k-options="DatePickerOptions" />
+
                 <span>&#8211;</span>
+
                 <input kendo-date-time-picker ng-model="EgaisEndDate" k-options="DatePickerOptions" />
 
+
+
             </div>
+
             <div><a class="calendar_but" href="" ng-click="GetLineEgaisReportCustomDuration(EgaisStartDate, EgaisEndDate)">Показать</a></div>
+
             <a href="#" class="calendar_logexp">Выгр.отчет по произв.</a>
+
         </div>
+
         <div class="block1_table" ng-repeat="product in CurrentLineEgaisReport.result">
+
             
+
             <br />
+
             <p style="color: #5872db; font-size: 10pt; margin: 0; padding: 0; font-weight: bold">Продукт: {{product.ProductName}}</p>
+
             <div class="block1_row block1_row_top">
+
                 <div class="block1_cell"><span>Режим</span></div>
+
                 <div class="block1_cell"><span>Начало</span></div>
+
                 <div class="block1_cell"><span>Конец</span></div>
+
                 
+
                 <div class="block1_cell"><span>Тотал 20гр.,<br>дал</span></div>
+
                 <div class="block1_cell"><span>Тотал б/в,<br>дал</span></div>
+
                 <div class="block1_cell"><span>Бутылки,<br>шт.</span></div>
+
                 <div class="block1_cell"><span>Темп.,<br>Гр.</span></div>
+
                 <div class="block1_cell"><span>Крепость,<br>%</span></div>
+
             </div>
+
             
+
             <div class="block1_row" ng-repeat="report in product.Report">
+
                 <div class="block1_cell"><span>{{report.ModeName}}({{report.Mode}})</span></div>
+
                 <div class="block1_cell"><span>{{report.StartDate | mydate | date: 'dd.MM.yyyy HH:mm'}}</span></div>
+
                 <div class="block1_cell"><span>{{report.EndDate | mydate | date: 'dd.MM.yyyy HH:mm'}}</span></div>
+
                 
+
                 <div class="block1_cell"><span>{{report.CurrentTotal20}}</span></div>
+
                 <div class="block1_cell"><span>{{report.VbsTotal}}</span></div>
+
                 <div class="block1_cell"><span>{{report.CurrentBottles}}</span></div>
+
                 <div class="block1_cell"><span>{{report.Temperature}}</span></div>
+
                 <div class="block1_cell"><span>{{report.Alcohol}}</span></div>
+
             </div>
+
             <p style="color: #5872db; font-size: 8pt; margin: 0; padding: 0; font-weight: bold">Всего, тотал: {{product.Total20Sum}} дал, тотал б/в: {{product.VbsSum}} дал</p>
+
         </div>
+
     </div>
+
 </form>
 
+
+
 <form>
+
     <input type="checkbox" name="checkbox" class="openblock_check" id="block1_erflk" />
+
     <div class="block1 block1_erflk">
+
         <div class="block1_head">
+
             <div class="block1_title">ФЛК - Линия {{CurrentLine.PointNumber}} - {{FlkDurationText}} - {{FlkInfoTitle(CurrentLineFlkArray.result.length)}}</div>
+
             <div class="{{FlkErrorIcon(CurrentLineFlkArray.result.length)}}"></div>
+
             <label for="block1_erflk" class="block1_open"></label>
+
             <div class="block1_errorline"></div>
+
         </div>
+
         <div class="block_calendar">
+
             <div class="block_calendar_days">
+
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[3]}}" ng-click="GetLineFlk(3)">Все</a>
+
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[2]}}" ng-click="GetLineFlkMonth(2)">Месяц</a>
+
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[1]}}" ng-click="GetLineFlkWeek(1)">Неделя</a>
+
                 <a href="" class="{{FlkMonthWeekDaySelectedDuration[0]}}" ng-click="GetLineFlkDay(0)">За сутки</a>
+
             </div>
+
             <div>
+
                 <span> Период:</span>
+
                 <input kendo-date-time-picker ng-model="FlkStartDate" k-options="DatePickerOptions" />
+
                 <span>&#8211;</span>
+
                 <input kendo-date-time-picker ng-model="FlkEndDate" k-options="DatePickerOptions" />
 
+
+
             </div>
+
             <div><a class="calendar_but" href="" ng-click="GetLineFlkCustomDuration(FlkStartDate, FlkEndDate)">Показать</a></div>
+
             <a href="#" class="calendar_logexp">Выгрузить логи</a>
+
         </div>
+
         <div class="block1_table">
+
             
+
             <div class="block1_row block1_row_top">
+
                 <div class="block1_cell"><span>Дата</span></div>
+
                 <div class="block1_cell"><span>Ошибка</span></div>
+
             </div>
+
             
+
             <div class="block1_row block1_error_row" ng-repeat="item in CurrentLineFlkArray.result">
+
                 <div class="block1_cell"><span>{{item.ErrorDate | mydate | date: 'dd.MM.yyyy'}}</span></div>
+
                 <div class="block1_cell"><span>{{item.Error}}</span></div>
+
             </div>
+
         </div>
+
     </div>
+
 </form>
+
+
 
 <form>
+
     <input type="checkbox" name="checkbox" class="openblock_check" id="block1_logs" />
+
     <div class="block1 block1_logs">
+
         <div class="block1_head">
+
             <div class="block1_title">Логи ({{CurrentBox.Logs.result.length}} событий) - {{SelectedDurationText}} </div>
+
             <label for="block1_logs" class="block1_open"></label>
+
         </div>
+
         <div class="block_calendar">
+
             <div class="block_calendar_days"><a href="" class="{{MonthWeekDaySelectedDuration[0]}}" ng-click="GetBoxLogsMonth(0)">Месяц</a><a href="" class="{{MonthWeekDaySelectedDuration[1]}}" ng-click="GetBoxLogsWeek(1)">Неделя</a><a href="" class="{{MonthWeekDaySelectedDuration[2]}}" ng-click="GetBoxLogsDay(2)">За сутки</a></div>
+
             <div>
+
                 <span> Период:</span>
+
                 <input kendo-date-time-picker ng-model="LogsStartDate" k-options="DatePickerOptions" />
+
                 <span>&#8211;</span>
+
                 <input kendo-date-time-picker ng-model="LogsEndDate" k-options="DatePickerOptions" />
 
+
+
             </div>
+
             <div><a class="calendar_but" href="" ng-click="GetBoxLogsCustomDuration(LogsStartDate, LogsEndDate)">Показать</a></div>
+
             <a href="#" class="calendar_logexp">Выгрузить логи</a>
+
         </div>
+
         <div class="block1_table">
+
             <div class="block1_row block1_row_top">
+
                 <div class="block1_cell"><span>Дата</span></div><div class="block1_cell"><span>Сообщение</span></div>
+
             </div>
+
             <div class="block1_row {{LogsTypeRowStyle(log.Type)}}" ng-repeat="log in CurrentBox.Logs.result">
+
                 <div class="block1_cell"><span>{{log.LogDate | mydate | date: 'dd.MM.yyyy HH:mm'}}</span></div><div class="block1_cell"><span>{{log.Message}}</span></div>
+
             </div>
+
         </div>
+
     </div>
+
 </form>
 
 
 
+
+
+
+
         </div>
+
     </div>
+
     <hr />
-    <script src="https://centrikt.ru:38000/Scripts/AsiiuOwnStyleJs.js"></script> 
+
+    <script src="/Scripts/AsiiuOwnStyleJs.js"></script> 
+
     
+
 </body>
+
 </html>
+

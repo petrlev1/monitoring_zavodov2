@@ -68,13 +68,23 @@
         <div ng-if="OrganisationsAreLoading">Загрузка...</div>
 
         <ul ng-repeat="organisation in Organisations" ng-click="GetFactoriesListByOrganisationId(organisation.Id)" ng-cloak>
-            <li><a href="" class="nav_open">
-                <div>{{organisation.Title}}</div></a></li>
+
+            <label>
+
+        <input type="checkbox" name="checkbox" class="navItem1check" />
+           <div class="navItem1">{{organisation.Title}}</div>
+           <input type="checkbox" name="checkbox" class="navItem1check" />
+           
+           <div class="allSubs">
+
             <div class="sub_nav" ng-repeat="factory in organisation.Factories" ng-click="LoadBoxesListByFactory(factory)">
-                <li><a href="" class="sub_active">
-                    <div>{{factory.Title}}</div></a></li>
+                <label>
+                <input type="checkbox" name="checkbox" class="navItem2check"/>
+                    <div class="navItem2">{{factory.Title}}</div>
+                    <input type="checkbox" name="checkbox" class="navItem2check"/>
+                    
                 <div class="sub_sub_nav" ng-repeat="box in factory.Boxes" ng-click="SetSelectedEntities(organisation, factory, box)">
-                    <li>
+                   
                         <a href="" ng-class="{'sub_sub_active' : box == SelectedBox}">
                             Шкаф сер.№ {{box.SerialNumber}}
 
@@ -87,10 +97,17 @@
                                 <img ng-if="!box.IsAlive" src="/Content/css/ic1.png" title="Оффлайн"/>
                             </div>
                         </a>
-                    </li>
+                   
                 </div>
+                  </label>
             </div>
+
+           </div>
+            
+            </label>
+
         </ul>
+
     </nav>
 
 
